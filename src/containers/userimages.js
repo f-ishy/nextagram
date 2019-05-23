@@ -41,6 +41,7 @@ export default class UserImages extends React.Component {
                   <img key={index} 
                     src={image} 
                     alt="" 
+                    className="addhover"
                     height={this.props.height} 
                     width={this.props.width} 
                     style={{objectFit:'cover', margin:'10px'}} 

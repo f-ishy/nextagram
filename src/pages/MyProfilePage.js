@@ -66,7 +66,7 @@ export default class MyProfilePage extends Component {
           <div>
             {this.state.userPics.map((image, index) =>
               <Link to={{pathname: "/image", state: {image: {image}}}} key={index}>
-                <img src={image} key={index} width="300px" height="300px" style={{margin:'10px', objectFit: 'cover'}} alt =""/>
+                <img src={image} key={index} width="300px" height="300px" className="addhover" style={{margin:'10px', objectFit: 'cover'}} alt =""/>
               </Link>
             )}
           </div>

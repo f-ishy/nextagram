@@ -51,3 +51,8 @@
   width: 80%;
 
 }
+
+.addhover:hover{
+  -webkit-filter: brightness(50%);
+  filter: brightness(50%);
+}
