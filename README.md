@@ -9,7 +9,8 @@ This is my Instagram clone project I worked on during my time in [Next Academy](
 
 ```diff
 - WARNING
-# If the loading cat doesn't stop spinning, visit https://insta.nextacademy.com/api/v1/users/ and allow that certificate.
+If the loading cat doesn't stop spinning,
+visit https://insta.nextacademy.com/api/v1/users/ and allow that certificate.
 ```
 
 The API used in this app was also provided by them. 
