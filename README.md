@@ -2,12 +2,11 @@
 
 This is my Instagram clone project I worked on during my time in [Next Academy](https://www.nextacademy.com)!
 
-The API used in this app was also provided by them.
+[![Netlify Status](https://api.netlify.com/api/v1/badges/9cababeb-3e68-4561-8411-2fac23ea3638/deploy-status)](https://app.netlify.com/sites/nextagramtyy/deploys)
 
+The API used in this app was also provided by them. 
 For now, you can sign up by clicking on "Login" then looking for the text that says sign up.
-
 This app uses local storage and context to remember the currently logged in user, but it's a bit wonky. :(
-
 Currently on this app I limited the main page to only show the first 10 users to prevent overloading the server, because one of my components is constantly re-calling certain endpoints when it is scrolled to focus.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
