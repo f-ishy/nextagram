@@ -1,3 +1,15 @@
+## Preface
+
+This is my Instagram clone project I worked on during my time in [https://www.nextacademy.com/](Next Academy)!
+
+The API used in this app was also provided by them.
+
+For now, you can sign up by clicking on "Login" then looking for the text that says sign up.
+
+This app uses local storage and context to remember the currently logged in user, but it's a bit wonky. :(
+
+Currently on this app I limited the main page to only show the first 10 users to prevent overloading the server, because one of my components is constantly re-calling certain endpoints when it is scrolled to focus.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
