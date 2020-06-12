@@ -1,6 +1,6 @@
 ## Preface
 
-This is my Instagram clone project I worked on during my time in [https://www.nextacademy.com/](Next Academy)!
+This is my Instagram clone project I worked on during my time in [Next Academy](https://www.nextacademy.com)!
 
 The API used in this app was also provided by them.
 
