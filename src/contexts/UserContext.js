@@ -1,6 +1,6 @@
 import React, { useState, createContext, useEffect } from 'react'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
 
 const UserContext = createContext(null)
 const JWT = localStorage.getItem('JWT')
