@@ -18,7 +18,7 @@ const App = () => {
 		axios
 			.get(`https://insta.nextacademy.com/api/v1/users/`)
 			.then((response) => {
-				setUsers(response.data);
+				setUsers(response.data.filter((res, index) => index < 10 ));
 				setIsLoading(false);
 			})
 			.catch((error) => {
