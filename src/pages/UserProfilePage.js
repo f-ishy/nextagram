@@ -1,21 +1,30 @@
 import React, {Component} from "react";
-import UserImages from '../containers/userimages';
+import UserImages from '../containers/UserImages';
 import {Container} from 'reactstrap';
+import styled from "styled-components";
+
+const StyledContainer = styled(Container)`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  width: 80%;
+`
+
 
 export default class UserProfilePage extends Component {
 
   render() {    
     return (
       <>
-        <Container className='d-flex text-center justify-content-center flex-column' style ={{width:'80%'}}>
-          <div style={{borderBottom: '1px solid grey'}}>
+        <StyledContainer>
             <img src={this.props.user.profileImage} width="150px" height="150px" style={{objectFit:"cover", borderRadius: "50%"}} alt=""/>
             <h1>Profile page of {this.props.user.username}</h1>
-          </div>
+            <hr />
           <div style={{margin:'auto'}}>
             <UserImages user_id={this.props.match.params.id} height="300px" width="300px"/>
           </div>
-        </Container>
+        </StyledContainer>
       </>
     )
   }

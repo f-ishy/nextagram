@@ -3,14 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
-    "bootstrap": "^4.3.1",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
-    "react-graceful-image": "^1.2.9",
-    "react-router-dom": "^5.0.0",
-    "react-scripts": "3.0.1",
-    "reactstrap": "^8.0.0"
+    "axios": "^0.18.1",
+    "bootstrap": "^4.4.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-graceful-image": "^1.2.12",
+    "react-icons": "^3.9.0",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "^3.3.1",
+    "reactstrap": "^8.4.1",
+    "styled-components": "^5.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -32,5 +34,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "prettier": "1.19.1"
   }
 }

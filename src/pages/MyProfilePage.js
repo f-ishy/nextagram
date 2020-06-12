@@ -1,77 +1,74 @@
-import React, {Component} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from 'axios';
-import Loading from '../components/loading';
-import {Link} from 'react-router-dom'
-import {Container} from 'reactstrap';
+import { useHistory } from 'react-router-dom'
+import { Container, Row, Col } from 'reactstrap';
+import { UserContext } from "../contexts/UserContext";
+import styled from "styled-components";
+import ImagePreviewer from "../containers/ImagePreviewer";
 
+const UserImageContainer = styled(Col)`
+  cursor: pointer;
+`;
 
+const UserImage = styled.img`
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
 
-export default class MyProfilePage extends Component {
-    constructor(props){
-    super(props)
-    this.state = {
-        userPics : [],
-        isLoading : true,
-    }
-  }
+const MyProfilePage = () => {
+  const [userPics, setUserPics] = useState([]);
+  const { currentUser } = useContext(UserContext);
+  const [selectedImage, setSelectedImage] = useState("");
+  const history = useHistory();
 
-
-  componentDidMount() {
-    axios({
+  useEffect(() => {
+    if (currentUser) {
+      axios({
         method: 'get',
-        url: 'https://insta.nextacademy.com/api/v1/images/me',
-        headers: {
-            "authorization": `Bearer ${localStorage.getItem('JWT')}`,
-            "content-type": "application/json"
-        } 
-    })
-    .then((response) => {
-        console.log(response)
-        this.setState({
-            userPics : response.data
+        url: `https://insta.nextacademy.com/api/v2/images?userId=${currentUser.id}`,
+      })
+        .then((response) => {
+          setUserPics(response.data)
         })
-        console.log(JSON.parse(localStorage.getItem('user_data')))
-        this.setState({isLoading: false})
-    })
 
-    .catch((error) => {
-        console.log(error);
-        localStorage.removeItem('JWT')
-        localStorage.removeItem('user_data')
-        alert("You're not signed in!")
-        this.props.history.push('/')
-    });
-  }
+        .catch((error) => {
+          console.log(error);
+          localStorage.removeItem('JWT')
+          localStorage.removeItem('user_data')
+          alert("You're not signed in!")
+          history.push('/')
+        });
+    }
+  }, [currentUser, history])
 
-  render() {
-
-    return (
-      <>
-        <Container className='d-flex text-center justify-content-center flex-column' style ={{width:'80%'}}>
-          <div style={{borderBottom: '1px solid grey'}}>
-            { (localStorage.getItem('JWT'))
-            ? <img 
-              src={`http://next-curriculum-instagram.s3.amazonaws.com/${JSON.parse(localStorage.getItem('user_data')).profile_picture}`} 
-              alt=""
-              style={{width:'150px', height:'150px', objectFit:'contain', borderRadius:'50%', border:'5px solid black'}}
-            />
-            : <img 
-              src="http://next-curriculum-instagram.s3.amazonaws.com/profile-placeholder.jpg" 
-              alt =""
-              style={{width:'100px', height:'100px', objectFit:'contain', border:'5px solid black', borderRadius:'50%'}}
-            />
-            }            
-            <h1>Own profile</h1>
-          </div>
+  return (
+    <>
+      {currentUser === null
+        ? <>Loading</>
+        :
+        <Container className='d-flex text-center justify-content-center flex-column' style={{ width: '80%' }}>
+          <ImagePreviewer selectedImage={selectedImage} setSelectedImage={setSelectedImage} />
           <div>
-            {this.state.userPics.map((image, index) =>
-              <Link to={{pathname: "/image", state: {image: {image}}}} key={index}>
-                <img src={image} key={index} width="300px" height="300px" className="addhover" style={{margin:'10px', objectFit: 'cover'}} alt =""/>
-              </Link>
-            )}
+            <img
+              src={currentUser.profile_picture}
+              alt=""
+              style={{ width: '150px', height: '150px', objectFit: 'contain', borderRadius: '50%', border: '5px solid #eee' }}
+            />
+            <h3>{currentUser.username}</h3>
           </div>
+          <hr style={{ width: '100%' }} />
+          <Row>
+            {userPics.map((image, index) =>
+              <UserImageContainer md={4} onClick={() => setSelectedImage(image)} key={index}>
+                <UserImage src={image.url} alt="" />
+              </UserImageContainer>
+            )}
+          </Row>
         </Container>
-      </>
-    )
-  }
+      }
+    </>
+  )
 }
+
+export default MyProfilePage;

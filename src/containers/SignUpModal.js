@@ -8,29 +8,18 @@ import axios from 'axios'
 export default class SignUpModal extends Component {
     state = {
         email: '',
-        username:'',
-        password:'',
+        username: '',
+        password: '',
         confirmpassword: '',
     }
 
-    handleEntry = event => {
-        if (event.target.id === 'email'){
-            this.setState({email : event.target.value})
-            console.log(this.state.email)
-        }else if (event.target.id === 'username'){
-            this.setState({username: event.target.value})
-        }else if (event.target.id === 'password'){
-            this.setState({password: event.target.value})
-            console.log(this.state.password)
-        }else if (event.target.id ==='confirmpassword'){
-            this.setState({confirmpassword: event.target.value})
-            console.log(this.state.confirmpassword)
-        }
+    handleEntry = e => {
+        this.setState({[e.target.name]: e.target.value})
     }
 
-    handleSubmit = event =>{
+    handleSubmit = event => {
         event.preventDefault()
-        if (this.state.password === this.state.confirmpassword){
+        if (this.state.password === this.state.confirmpassword) {
             axios({
                 method: 'post',
                 url: 'https://insta.nextacademy.com/api/v1/users/',
@@ -41,35 +30,34 @@ export default class SignUpModal extends Component {
                     username: this.state.username,
                 }
             })
-            .then((response) => {
-                console.log(response.data.message)
-                localStorage.setItem('JWT', response.data.auth_token);
-                localStorage.setItem('user_data', JSON.stringify(response.data.user))    
-                this.props.toggleSignUpModal()
-                this.setState({})
-
-
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-        } else{
+                .then((response) => {
+                    console.log(response.data.message)
+                    localStorage.setItem('JWT', response.data.auth_token);
+                    localStorage.setItem('user_data', JSON.stringify(response.data.user))
+                    this.props.setCurrentModal('')
+                    this.setState({})
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        } else {
             alert('Your passwords do not match')
         }
     }
 
     render() {
-        const {toggleLoginModal, isSignUpForm, toggleSignUpModal} = this.props;
-        const {handleEntry, handleSubmit} = this;
+        // const {toggleLoginModal, isSignUpForm, toggleSignUpModal} = this.props;
+        const { currentModal, setCurrentModal } = this.props;
+        const { handleEntry, handleSubmit } = this;
         return (
             <>
-                <Modal isOpen={isSignUpForm} toggle={toggleSignUpModal}>
-                    <ModalHeader toggle={toggleSignUpModal}>Sign up</ModalHeader>
+                <Modal isOpen={currentModal === 'signup'} toggle={() => (setCurrentModal(''))}>
+                    <ModalHeader toggle={() => (setCurrentModal(''))}>Sign up</ModalHeader>
                     <ModalBody>
                         <Form onSubmit={handleSubmit}>
                             <FormGroup>
                                 <Label for="email">Email</Label>
-                                <Input onChange={handleEntry} type="email" name="email" id="email" placeholder="email address"/>
+                                <Input onChange={handleEntry} type="email" name="email" id="email" placeholder="email address" />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="username">Username</Label>
@@ -81,22 +69,22 @@ export default class SignUpModal extends Component {
                             </FormGroup>
                             <FormGroup>
                                 <Label for="password">Confirm Password</Label>
-                                <Input 
+                                <Input
                                     onChange={handleEntry}
-                                    type="password" 
-                                    name="confirmpassword" 
-                                    id="confirmpassword" 
-                                    placeholder="re-type password"/>
+                                    type="password"
+                                    name="confirmpassword"
+                                    id="confirmpassword"
+                                    placeholder="re-type password" />
                             </FormGroup>
-                            <p>Already a member? <a href="/#" onClick={toggleLoginModal} >Log in here.</a></p>
+                            <p>Already a member? <a href="/#" onClick={() => setCurrentModal('login')} >Log in here.</a></p>
                             <ModalFooter>
                                 <div>
-                                    <Button color="primary">Sign up</Button>{' '}
-                                    <Button color="secondary" onClick={toggleSignUpModal}>Cancel</Button>
+                                    <Button color="primary" type="submit">Sign up</Button>{' '}
+                                    <Button color="secondary" onClick={() => (setCurrentModal(''))}>Cancel</Button>
                                 </div>
 
                             </ModalFooter>
-                        </Form>                    
+                        </Form>
                     </ModalBody>
                 </Modal>
             </>
