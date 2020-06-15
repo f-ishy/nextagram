@@ -31,7 +31,6 @@ export default class SignUpModal extends Component {
                 }
             })
                 .then((response) => {
-                    console.log(response.data.message)
                     localStorage.setItem('JWT', response.data.auth_token);
                     localStorage.setItem('user_data', JSON.stringify(response.data.user))
                     this.props.setCurrentModal('')

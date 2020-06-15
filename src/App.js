@@ -9,6 +9,7 @@ import NavBar from "./containers/NavBar";
 import Loading from "./components/Loading";
 import MyProfilePage from "./pages/MyProfilePage";
 import PictureDisplay from "./components/PictureDisplay";
+import styled from "styled-components";
 
 const App = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -26,8 +27,15 @@ const App = () => {
 			});
 	}, []);
 
+	const Layout = styled.div`
+		display: flex;
+		flex-direction: column;
+		height: 100vh;
+		overflow-y: auto;
+	`;
+
 	return (
-		<>
+		<Layout>
 			<NavBar />
 			{isLoading ? <Loading /> : null}
 			<Switch>
@@ -61,7 +69,7 @@ const App = () => {
 					render={(props) => <PictureDisplay {...props} />}
 				/>
 			</Switch>
-		</>
+		</Layout>
 	);
 };
 

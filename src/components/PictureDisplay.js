@@ -4,7 +4,6 @@ export default class PictureDisplay extends React.Component {
     
     render() {
         const {image} = this.props.location.state
-        console.log('asd')
         return (
             <div style={{height: '90vh', width: '100%', backgroundColor: 'rgba(0,0,0,0.2)' }}>
                 <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

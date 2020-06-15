@@ -9,6 +9,6 @@ export const likeImage = (id) => {
       "content-type": "application/json"
     }
   })
-    .then((res) => { console.log(res); })
+    .then((res) => { console.log(res, "Image liked probably, but no indicator set yet!"); })
     .catch((err) => { console.log(err) })
 }

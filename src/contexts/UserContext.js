@@ -11,7 +11,6 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     // if JWT exists, get the username and profile pic and place in context
     if (JWT && currentUser === null) {
-      console.log(JWT)
       axios({
         method: 'get',
         url: 'https://insta.nextacademy.com/api/v1/users/me',

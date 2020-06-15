@@ -27,7 +27,6 @@ const NavBar = () => {
         setCurrentModal('');
         history.push('/')
         setIsOpen(false);
-        console.log(currentUser)
     }
 
     return (
