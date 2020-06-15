@@ -9,6 +9,10 @@ const ImageContainer = styled.div`
   display: inline-block;
   height: ${({ height }) => height};
   cursor: pointer;
+
+  @media (max-width: 500px) {
+    height: 80px;
+  }
 `;
 
 const Grid = styled.div`

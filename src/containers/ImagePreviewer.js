@@ -20,7 +20,8 @@ const ImagePreviewContainer = styled.div`
 `;
 
 const SelectedImage = styled.img`
-  height: 80vh;
+  max-height: 80vh;
+  max-width: 80vw;
   cursor: pointer;
   &.darken{
     animation: ${fadeImage} 0.2s linear;
