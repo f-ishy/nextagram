@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import axios from "axios";
-import "bootstrap/dist/css/bootstrap.css";
+import styled from "styled-components";
 
+import "bootstrap/dist/css/bootstrap.css";
 import Home from "./pages/Home";
 import UserProfilePage from "./pages/UserProfilePage";
 import NavBar from "./containers/NavBar";
 import Loading from "./components/Loading";
 import MyProfilePage from "./pages/MyProfilePage";
 import PictureDisplay from "./components/PictureDisplay";
-import styled from "styled-components";
 
 const App = () => {
 	const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +19,7 @@ const App = () => {
 		axios
 			.get(`https://insta.nextacademy.com/api/v1/users/`)
 			.then((response) => {
-				setUsers(response.data.filter((res, index) => index < 10 ));
+				setUsers(response.data.filter((res, index) => index < 10));
 				setIsLoading(false);
 			})
 			.catch((error) => {
