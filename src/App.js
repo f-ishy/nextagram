@@ -10,16 +10,22 @@ import NavBar from "./containers/NavBar";
 import Loading from "./components/Loading";
 import MyProfilePage from "./pages/MyProfilePage";
 import PictureDisplay from "./components/PictureDisplay";
+import { connect } from "react-redux";
+import { getCurrentUser } from "./actions";
 
-const App = () => {
+const App = ({ getCurrentUser }) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [users, setUsers] = useState([]);
+
+	useEffect(() => {
+		getCurrentUser();
+	}, []);
 
 	useEffect(() => {
 		axios
 			.get(`https://insta.nextacademy.com/api/v1/users/`)
 			.then((response) => {
-				setUsers(response.data.filter((res, index) => index < 10));
+				setUsers(response.data.filter((_, index) => index < 10));
 				setIsLoading(false);
 			})
 			.catch((error) => {
@@ -73,4 +79,8 @@ const App = () => {
 	);
 };
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+	getCurrentUser: () => dispatch(getCurrentUser()),
+});
+
+export default connect(null, mapDispatchToProps)(App);
