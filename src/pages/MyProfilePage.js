@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import { useHistory } from 'react-router-dom'
 import { Container, Row, Col } from 'reactstrap';
-import { UserContext } from "../contexts/UserContext";
 import styled from "styled-components";
 import ImagePreviewer from "../containers/ImagePreviewer";
+import { connect } from "react-redux";
 
 const UserImageContainer = styled(Col)`
   cursor: pointer;
@@ -16,14 +16,13 @@ const UserImage = styled.img`
   align-items: center;
 `;
 
-const MyProfilePage = () => {
+const MyProfilePage = ({currentUser}) => {
   const [userPics, setUserPics] = useState([]);
-  const { currentUser } = useContext(UserContext);
   const [selectedImage, setSelectedImage] = useState("");
   const history = useHistory();
 
   useEffect(() => {
-    if (currentUser) {
+    if (currentUser.id) {
       axios({
         method: 'get',
         url: `https://insta.nextacademy.com/api/v2/images?userId=${currentUser.id}`,
@@ -44,7 +43,7 @@ const MyProfilePage = () => {
 
   return (
     <>
-      {currentUser === null
+      {!currentUser.id
         ? <>Loading</>
         :
         <Container className='d-flex text-center justify-content-center flex-column' style={{ width: '80%' }}>
@@ -71,4 +70,6 @@ const MyProfilePage = () => {
   )
 }
 
-export default MyProfilePage;
+const mapStateToProps = ({currentUser}) => ({currentUser})
+
+export default connect(mapStateToProps)(MyProfilePage);
