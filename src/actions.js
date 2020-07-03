@@ -37,9 +37,14 @@ export function getCurrentUser() {
 			})
 				.then((res) => res.json())
 				.then((res) => {
-					dispatch(getCurrentUserSuccess(res));
+					if (res.status === "failed") {
+						dispatch(getCurrentUserError(res.message));
+					} else {
+						dispatch(getCurrentUserSuccess(res));
+					}
 				})
 				.catch((err) => {
+					console.log(err)
 					dispatch(getCurrentUserError(err));
 				});
 		}
