@@ -40,10 +40,10 @@ const LoginModal = ({ currentModal, setCurrentModal, setCurrentUser }) => {
 				if (res.status === "failed") {
 					console.log(res);
 				} else {
-					localStorage.setItem("JWT", res.auth_token);
-					setCurrentUser(res.user);
 					setCurrentModal("");
+          setCurrentUser(res.user);
 					history.push("/");
+					localStorage.setItem("JWT", res.auth_token);
 				}
 			})
 			.catch((err) => {

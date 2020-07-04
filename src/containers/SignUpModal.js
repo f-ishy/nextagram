@@ -33,10 +33,10 @@ class SignUpModal extends Component {
                 }
             })
                 .then((response) => {
-                    localStorage.setItem('JWT', response.data.auth_token);
                     this.props.setCurrentUser(response.data.user)
                     this.props.setCurrentModal('')
                     this.setState({})
+                    localStorage.setItem('JWT', response.data.auth_token);
                 })
                 .catch((error) => {
                     console.log(error);
