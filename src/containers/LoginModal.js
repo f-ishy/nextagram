@@ -1,18 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import {
   Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 import axios from 'axios';
-import { UserContext } from '../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { setCurrentUser } from "../actions";
 
-const LoginModal = ({ currentModal, setCurrentModal }) => {
+
+const LoginModal = ({ currentModal, setCurrentModal, setCurrentUser }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [loginFailed, setLoginFailed] = useState(false);
-  const {setCurrentUser} = useContext(UserContext);
   const history = useHistory();
 
 
@@ -76,4 +77,4 @@ const LoginModal = ({ currentModal, setCurrentModal }) => {
   )
 }
 
-export default LoginModal;
+export default connect(null, {setCurrentUser})(LoginModal);
