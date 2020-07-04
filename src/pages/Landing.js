@@ -33,7 +33,7 @@ const AuthBox = styled.div`
 `;
 
 const Branding = styled.p`
-	font-family: "Grand Hotel", cursive;
+	font-family: "Grand Hotel", "Berlin Sans FB", cursive;
 	font-size: 3rem;
 `;
 
