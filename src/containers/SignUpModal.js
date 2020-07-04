@@ -4,8 +4,10 @@ import {
     Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input,
 } from 'reactstrap';
 import axios from 'axios'
+import { connect } from 'react-redux';
+import { setCurrentUser } from '../actions';
 
-export default class SignUpModal extends Component {
+class SignUpModal extends Component {
     state = {
         email: '',
         username: '',
@@ -32,7 +34,7 @@ export default class SignUpModal extends Component {
             })
                 .then((response) => {
                     localStorage.setItem('JWT', response.data.auth_token);
-                    localStorage.setItem('user_data', JSON.stringify(response.data.user))
+                    this.props.setCurrentUser(response.data.user)
                     this.props.setCurrentModal('')
                     this.setState({})
                 })
@@ -45,7 +47,6 @@ export default class SignUpModal extends Component {
     }
 
     render() {
-        // const {toggleLoginModal, isSignUpForm, toggleSignUpModal} = this.props;
         const { currentModal, setCurrentModal } = this.props;
         const { handleEntry, handleSubmit } = this;
         return (
@@ -90,3 +91,11 @@ export default class SignUpModal extends Component {
         )
     }
 }
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		setCurrentUser: (user) => dispatch(setCurrentUser(user)),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(SignUpModal)

@@ -29,7 +29,7 @@ const initialState = {
 function currentUserReducer(state = initialState, action) {
 	switch (action.type) {
 		case SET_CURRENT_USER:
-			return { ...state, ...action.user };
+			return { ...state, status: "fulfilled", ...action.user };
 		case GET_CURRENT_USER_BEGIN:
 			return { ...state, status: "pending" };
 		case GET_CURRENT_USER_SUCCESS:
