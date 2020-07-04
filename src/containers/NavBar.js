@@ -9,6 +9,7 @@ import {
 	Nav,
 	NavItem,
 	Navbar,
+	Spinner,
 } from "reactstrap";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
@@ -18,14 +19,18 @@ import { connect } from "react-redux";
 const NavBar = ({ currentUser, removeCurrentUser }) => {
 	const [currentModal, setCurrentModal] = useState("");
 	const [isOpen, setIsOpen] = useState(false);
+	const [isLoggingOut, setIsLoggingOut] = useState(false);
 	const history = useHistory();
 
 	const logout = () => {
-		localStorage.clear()
-		removeCurrentUser();
-		setCurrentModal("");
-		history.push("/");
-		setIsOpen(false);
+		setIsLoggingOut(true);
+		setTimeout(() => {
+			setCurrentModal("");
+			setIsOpen(false);
+			localStorage.clear();
+			removeCurrentUser();
+			history.push("/");
+		}, 1500);
 	};
 
 	return (
@@ -56,10 +61,12 @@ const NavBar = ({ currentUser, removeCurrentUser }) => {
 							<NavItem>
 								<Button
 									color="danger"
-									onClick={logout}
+									onClick={isLoggingOut ? null : logout}
 									style={{ margin: "10px" }}
 								>
-									Logout
+									<div>
+										{isLoggingOut ? <Spinner size="sm" /> : "Logout"}
+									</div>
 								</Button>
 							</NavItem>
 						</Nav>
