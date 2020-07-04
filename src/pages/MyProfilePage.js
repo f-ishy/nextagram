@@ -33,8 +33,7 @@ const MyProfilePage = ({currentUser}) => {
 
         .catch((error) => {
           console.log(error);
-          localStorage.removeItem('JWT')
-          localStorage.removeItem('user_data')
+          localStorage.clear()
           alert("You're not signed in!")
           history.push('/')
         });

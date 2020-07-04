@@ -24,16 +24,18 @@ const App = ({ getCurrentUser, currentUser }) => {
 	}, []);
 
 	useEffect(() => {
-		axios
-			.get(`https://insta.nextacademy.com/api/v1/users/`)
-			.then((response) => {
-				setUsers(response.data.filter((_, index) => index < 10));
-				setIsLoading(false);
-			})
-			.catch((error) => {
-				console.log(error);
-			});
-	}, []);
+		if (currentUser.username) {
+			axios
+				.get(`https://insta.nextacademy.com/api/v1/users/`)
+				.then((response) => {
+					setUsers(response.data.filter((_, index) => index < 10));
+					setIsLoading(false);
+				})
+				.catch((error) => {
+					console.log(error);
+				});
+		}
+	}, [currentUser]);
 
 	const Layout = styled.div`
 		display: flex;
@@ -41,12 +43,6 @@ const App = ({ getCurrentUser, currentUser }) => {
 		height: 100vh;
 		overflow-y: auto;
 	`;
-
-	/* 
-		1. Check if there is an existing session (show loading cat)
-		2. If session exists, show usual page
-		3. If session does not exist, show sign up form
-	*/
 
 	return (
 		<Layout>
@@ -62,7 +58,7 @@ const App = ({ getCurrentUser, currentUser }) => {
 								<Route
 									exact
 									path="/"
-									render={(props) => <Home {...props} users={users} />} //it takes the required Route props and adds in users and isLoading from this class' state
+									render={(props) => <Home {...props} users={users} />}
 								/>
 								<Route
 									exact

@@ -21,8 +21,7 @@ const NavBar = ({ currentUser, removeCurrentUser }) => {
 	const history = useHistory();
 
 	const logout = () => {
-		localStorage.removeItem("JWT");
-		localStorage.removeItem("user_data");
+		localStorage.clear()
 		removeCurrentUser();
 		setCurrentModal("");
 		history.push("/");
