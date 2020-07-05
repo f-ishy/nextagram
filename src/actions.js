@@ -74,11 +74,11 @@ export function getUserList() {
 		dispatch(getUserListBegin());
 		return fetch("https://insta.nextacademy.com/api/v1/users", {
 			method: "get",
-			redirect: "follow"
+			redirect: "follow",
 		})
 			.then((res) => res.json())
 			.then((users) => {
-					dispatch(getUserListSuccess(users));
+				dispatch(getUserListSuccess(users));
 			})
 			.catch((err) => {
 				console.log(err);

@@ -25,11 +25,11 @@ const initialUserState = {
 function currentUserReducer(state = initialUserState, action) {
 	switch (action.type) {
 		case SET_CURRENT_USER:
-			return { ...state, status: "fulfilled", ...action.user };
+			return { ...state, status: "success", ...action.user };
 		case GET_CURRENT_USER_BEGIN:
 			return { ...state, status: "pending" };
 		case GET_CURRENT_USER_SUCCESS:
-			return { ...state, status: "fulfilled", ...action.user };
+			return { ...state, status: "success", ...action.user };
 		case GET_CURRENT_USER_ERROR:
 			return { ...state, status: "error", error: action.error };
 		case REMOVE_CURRENT_USER:
@@ -58,7 +58,7 @@ function userListReducer(state = {status: "" , users: []}, action) {
 			return { ...state, status: "pending" };
 		case GET_USER_LIST_SUCCESS:
 			// TODO: add logic here to compare users and only change state if user list is different
-			return { ...state, status: "fulfilled", users: action.users };
+			return { ...state, status: "success", users: action.users };
 		case GET_USER_LIST_ERROR:
 			return { ...state, status: "error", error: action.error };
 		default:
