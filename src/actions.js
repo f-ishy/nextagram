@@ -44,9 +44,45 @@ export function getCurrentUser() {
 					}
 				})
 				.catch((err) => {
-					console.log(err)
+					console.log(err);
 					dispatch(getCurrentUserError(err));
 				});
 		}
+	};
+}
+
+/* Actions to get user list */
+
+export const GET_USER_LIST_BEGIN = "GET_USER_LIST_BEGIN";
+export const GET_USER_LIST_SUCCESS = "GET_USER_LIST_SUCCESS";
+export const GET_USER_LIST_ERROR = "GET_USER_LIST_ERROR";
+
+function getUserListBegin() {
+	return { type: GET_USER_LIST_BEGIN };
+}
+
+function getUserListSuccess(users) {
+	return { type: GET_USER_LIST_SUCCESS, users };
+}
+
+function getUserListError(error) {
+	return { type: GET_USER_LIST_ERROR, error };
+}
+
+export function getUserList() {
+	return (dispatch) => {
+		dispatch(getUserListBegin());
+		return fetch("https://insta.nextacademy.com/api/v1/users", {
+			method: "get",
+			redirect: "follow"
+		})
+			.then((res) => res.json())
+			.then((users) => {
+					dispatch(getUserListSuccess(users));
+			})
+			.catch((err) => {
+				console.log(err);
+				dispatch(getUserListError(err));
+			});
 	};
 }
