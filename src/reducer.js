@@ -40,6 +40,17 @@ function currentUserReducer(state = initialUserState, action) {
 }
 
 /* Reducer for user list */
+/* User list shape:
+[
+	{
+		id: int,
+		username: String,
+		profileImage: String
+
+		// for the actions involving their images:
+		images: [String]
+	}
+] */
 
 function userListReducer(state = {status: "" , users: []}, action) {
 	switch (action.type) {
