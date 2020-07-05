@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Image from "react-graceful-image";
 import styled from 'styled-components';
 import { Container } from 'reactstrap';
 import ImagePreviewer from './ImagePreviewer';
@@ -41,7 +40,7 @@ export default function UserImages({ user_id, height, width }) {
       <Grid>
         {images.map((image, index) =>
           <ImageContainer onClick={() => setSelectedImage(image)} key={index} width={width} height={height} >
-            <Image
+            <img
               src={image.url}
               alt=""
               className="addhover"

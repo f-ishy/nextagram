@@ -62,10 +62,7 @@ const AuthPages = ({ userList, getUserList }) => {
 	);
 };
 
-const mapStateToProps = ({ userList }) => {
-	console.log(userList);
-	return { userList };
-};
+const mapStateToProps = ({ userList }) => ({ userList });
 
 const mapDispatchToProps = (dispatch) => ({
 	getUserList: () => dispatch(getUserList()),
