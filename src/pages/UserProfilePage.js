@@ -22,7 +22,7 @@ export default class UserProfilePage extends Component {
             <h1>Profile page of {this.props.user.username}</h1>
             <hr />
           <div style={{margin:'auto'}}>
-            <UserImages user_id={this.props.match.params.id} height="300px" width="300px"/>
+            <UserImages user_id={parseInt(this.props.match.params.id)} height="300px" width="300px"/>
           </div>
         </StyledContainer>
       </>

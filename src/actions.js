@@ -44,9 +44,81 @@ export function getCurrentUser() {
 					}
 				})
 				.catch((err) => {
-					console.log(err)
+					console.log(err);
 					dispatch(getCurrentUserError(err));
 				});
 		}
+	};
+}
+
+/* Actions to get user list */
+
+export const GET_USER_LIST_BEGIN = "GET_USER_LIST_BEGIN";
+export const GET_USER_LIST_SUCCESS = "GET_USER_LIST_SUCCESS";
+export const GET_USER_LIST_ERROR = "GET_USER_LIST_ERROR";
+
+function getUserListBegin() {
+	return { type: GET_USER_LIST_BEGIN };
+}
+
+function getUserListSuccess(users) {
+	return { type: GET_USER_LIST_SUCCESS, users };
+}
+
+function getUserListError(error) {
+	return { type: GET_USER_LIST_ERROR, error };
+}
+
+export function getUserList() {
+	return (dispatch) => {
+		dispatch(getUserListBegin());
+		return fetch("https://insta.nextacademy.com/api/v1/users", {
+			method: "get",
+			redirect: "follow",
+		})
+			.then((res) => res.json())
+			.then((users) => {
+				dispatch(getUserListSuccess(users));
+			})
+			.catch((err) => {
+				console.log(err);
+				dispatch(getUserListError(err));
+			});
+	};
+}
+
+/* Actions for user images */
+
+export const GET_USER_IMAGES_BEGIN = "GET_USER_IMAGES_BEGIN";
+export const GET_USER_IMAGES_SUCCESS = "GET_USER_IMAGES_SUCCESS";
+export const GET_USER_IMAGES_ERROR = "GET_USER_IMAGES_ERROR";
+
+function getUserImagesBegin(id) {
+	return { type: GET_USER_IMAGES_BEGIN, id };
+}
+
+function getUserImagesSuccess(id, images) {
+	return { type: GET_USER_IMAGES_SUCCESS, id, images };
+}
+
+function getUserImagesError(id, error) {
+	return { type: GET_USER_IMAGES_ERROR, id, error };
+}
+
+export function getUserImages(id) {
+	return (dispatch) => {
+		dispatch(getUserImagesBegin(id));
+		return fetch(`https://insta.nextacademy.com/api/v2/images?userId=${id}`, {
+			method: "get",
+			redirect: "follow",
+		})
+			.then((res) => res.json())
+			.then((images) => {
+				dispatch(getUserImagesSuccess(id, images));
+			})
+			.catch((err) => {
+				console.log(err);
+				dispatch(getUserImagesError(id, err));
+			});
 	};
 }
