@@ -86,3 +86,39 @@ export function getUserList() {
 			});
 	};
 }
+
+/* Actions for user images */
+
+export const GET_USER_IMAGES_BEGIN = "GET_USER_IMAGES_BEGIN";
+export const GET_USER_IMAGES_SUCCESS = "GET_USER_IMAGES_SUCCESS";
+export const GET_USER_IMAGES_ERROR = "GET_USER_IMAGES_ERROR";
+
+function getUserImagesBegin(id) {
+	return { type: GET_USER_IMAGES_BEGIN, id };
+}
+
+function getUserImagesSuccess(id, images) {
+	return { type: GET_USER_IMAGES_SUCCESS, id, images };
+}
+
+function getUserImagesError(id, error) {
+	return { type: GET_USER_IMAGES_ERROR, id, error };
+}
+
+export function getUserImages(id) {
+	return (dispatch) => {
+		dispatch(getUserImagesBegin(id));
+		return fetch(`https://insta.nextacademy.com/api/v2/images?userId=${id}`, {
+			method: "get",
+			redirect: "follow",
+		})
+			.then((res) => res.json())
+			.then((images) => {
+				dispatch(getUserImagesSuccess(id, images));
+			})
+			.catch((err) => {
+				console.log(err);
+				dispatch(getUserImagesError(id, err));
+			});
+	};
+}
