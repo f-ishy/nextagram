@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import logo from "../logo.png";
+import logo from "../images/logo.png";
 import "bootstrap/dist/css/bootstrap.css";
 import { Link, useHistory } from "react-router-dom";
 import {

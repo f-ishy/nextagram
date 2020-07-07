@@ -26,7 +26,7 @@ class Loading extends React.Component {
 				>
 					<Lottie options={this.defaultOptions} height={400} width={400} />
 					<p>
-						If the cat can't stop spinning, please{" "}
+						If the girl won't stop swinging, please{" "}
 						<a
 							href="https://insta.nextacademy.com/api/v1/users/"
 							target="_blank"
