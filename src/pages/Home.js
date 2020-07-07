@@ -50,14 +50,15 @@ class Home extends Component {
 		const { users } = this.props;
 		return (
 			<>
-				<ul style={{ padding: "0" }}>
-					{users.slice(0, this.state.length).map((user) => (
-						<UserCards user={user} key={user.id} />
-					))}
-					<div ref={(loadingRef) => (this.loadingRef = loadingRef)} style={{textAlign: 'center', height: "3rem"}}>
-						Loading more pics!!!!
-					</div>
-				</ul>
+				{users.slice(0, this.state.length).map((user) => (
+					<UserCards user={user} key={user.id} />
+				))}
+				<div
+					ref={(loadingRef) => (this.loadingRef = loadingRef)}
+					style={{ textAlign: "center", height: "3rem" }}
+				>
+					Loading more pics!!!!
+				</div>
 			</>
 		);
 	}

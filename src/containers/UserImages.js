@@ -4,6 +4,7 @@ import { Container } from "reactstrap";
 import ImagePreviewer from "./ImagePreviewer";
 import { getUserImages } from "../actions";
 import { connect } from "react-redux";
+import loading from "../loadingcat.gif";
 
 const ImageContainer = styled.div`
 	display: inline-block;
@@ -37,10 +38,9 @@ function UserImages({ user_id, height, width, userList, getUserImages }) {
 				selectedImage={selectedImage}
 				setSelectedImage={setSelectedImage}
 			/>
-			<Grid>
-				{Array.isArray(images) &&
-					images.length > 0 &&
-					images.map((image, index) => (
+			{Array.isArray(images) && images.length > 0 && (
+				<Grid>
+					{images.map((image, index) => (
 						<ImageContainer
 							onClick={() => setSelectedImage(image)}
 							key={index}
@@ -57,11 +57,12 @@ function UserImages({ user_id, height, width, userList, getUserImages }) {
 							/>
 						</ImageContainer>
 					))}
-				{Array.isArray(images) &&
-					images.length === 0 &&
-					"This user has no images! :((("}
-				{!images && "Loading"}
-			</Grid>
+				</Grid>
+			)}
+			{Array.isArray(images) && images.length === 0 && (
+				<div style={{margin: "2rem"}}>This user has no images! :(((</div>
+			)}
+			{!images && <img src={loading} alt=""></img>}
 		</Container>
 	);
 }
