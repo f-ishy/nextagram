@@ -22,7 +22,11 @@ const ImageContainer = styled.div`
 	height: ${({ height }) => height};
 	cursor: pointer;
 
-	@media (max-width: 500px) {
+	@media (max-width: 768px) {
+		height: 100px;
+	}
+
+	@media (max-width: 420px) {
 		height: 80px;
 	}
 `;

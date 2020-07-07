@@ -10,7 +10,7 @@ const ProfilePic = styled.img`
 	height: 80px;
 	object-fit: cover;
 	border-radius: 50%;
-	margin: 1em;
+	margin-right: 1em;
 `;
 
 const FlexedTitle = styled(CardTitle)`
@@ -28,6 +28,7 @@ const UserCard = styled(Card)`
 	border-style: inset;
 	border-radius: 1rem;
 	margin-bottom: 1rem;
+	padding: 1em;
 `;
 
 export default function UserCards({ user }) {
