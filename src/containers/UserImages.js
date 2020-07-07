@@ -1,10 +1,21 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Container } from "reactstrap";
+import { connect } from "react-redux";
+
 import ImagePreviewer from "./ImagePreviewer";
 import { getUserImages } from "../actions";
-import { connect } from "react-redux";
-import loading from "../loadingcat.gif";
+import ellipsis from "../lotties/ellipsis.json";
+import Lottie from "react-lottie";
+
+const defaultOptions = {
+	loop: true,
+	autoplay: true,
+	animationData: ellipsis,
+	rendererSettings: {
+		preserveAspectRatio: "xMidYMid slice",
+	},
+};
 
 const ImageContainer = styled.div`
 	display: inline-block;
@@ -60,9 +71,9 @@ function UserImages({ user_id, height, width, userList, getUserImages }) {
 				</Grid>
 			)}
 			{Array.isArray(images) && images.length === 0 && (
-				<div style={{margin: "2rem"}}>This user has no images! :(((</div>
+				<div style={{ margin: "2rem" }}>This user has no images! :(((</div>
 			)}
-			{!images && <img src={loading} alt=""></img>}
+			{!images && <Lottie options={defaultOptions} height={200} width={200} />}
 		</Container>
 	);
 }
