@@ -1,32 +1,32 @@
 import React, { useState } from "react";
-import preview from "../images/preview.png";
 import styled from "styled-components";
-import { Button } from "reactstrap";
+
+import preview from "../images/preview.png";
 import SignUpModal from "../containers/SignUpModal";
 import LoginModal from "../containers/LoginModal";
+import { PurpleButton } from "../components/Buttons";
 
 const LandingContainer = styled.div`
 	height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-  background-color: #eee;
+	background-color: ${({ theme }) => theme.colors.black};
 `;
 
 const PreviewImg = styled.img`
 	height: 80%;
-  margin-right: 5rem;
-  @media (max-width: 768px){
-    display: none;
-  }
+	margin-right: 5rem;
+	@media (max-width: 576px) {
+		display: none;
+	}
 `;
 
 const AuthBox = styled.div`
-  background-color: white;
+	background-color: ${({ theme }) => theme.colors.violet};
 	text-align: center;
 	height: 80vh;
-	border: 1px solid #777;
-	border-radius: 1rem;
+	border: 1px solid ${({ theme }) => theme.colors.darkGrey};
 	display: flex;
 	flex-direction: column;
 	padding: 2rem;
@@ -38,21 +38,19 @@ const Branding = styled.p`
 `;
 
 const Tagline = styled.p`
-	color: #777;
-  margin-bottom: 5rem;
+	margin-bottom: 5rem;
 `;
 
 const ButtonsContainer = styled.div`
-  margin: auto unset;
+	margin: auto unset;
 `;
 
 const ButtonSeparator = styled.div`
 	display: flex;
 	flex-direction: row;
-  margin: 1rem 0;
-  color: #777;
+	margin: 1rem 0;
 	> div {
-    margin: 0 1rem;
+		margin: 0 1rem;
 		height: 1px;
 		flex-grow: 1;
 		flex-shrink: 1;
@@ -71,19 +69,22 @@ export const Landing = () => {
 				<AuthBox>
 					<Branding>Nextagram</Branding>
 					<Tagline>Sign up or log in to see your friends' photos!</Tagline>
-          <ButtonsContainer>
-					<Button color="primary" onClick={() => setCurrentModal("login")}>
-						Log in
-					</Button>
-					<ButtonSeparator>
-						<div />
-						OR
-						<div />
-					</ButtonSeparator>
-					<Button color="primary" onClick={() => setCurrentModal("signup")}>
-						Sign Up
-					</Button>
-          </ButtonsContainer>
+					<ButtonsContainer>
+						<PurpleButton onClick={() => setCurrentModal("login")}>
+							Log in
+						</PurpleButton>
+						<ButtonSeparator>
+							<div />
+							OR
+							<div />
+						</ButtonSeparator>
+						<PurpleButton
+							color="primary"
+							onClick={() => setCurrentModal("signup")}
+						>
+							Sign Up
+						</PurpleButton>
+					</ButtonsContainer>
 				</AuthBox>
 			</LandingContainer>
 			<SignUpModal

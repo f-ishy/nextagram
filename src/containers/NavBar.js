@@ -1,20 +1,33 @@
 import React, { useState } from "react";
-import logo from "../images/logo.png";
 import "bootstrap/dist/css/bootstrap.css";
 import { Link, useHistory } from "react-router-dom";
 import {
 	NavbarToggler,
 	Collapse,
-	Button,
 	Nav,
 	NavItem,
 	Navbar,
 	Spinner,
 } from "reactstrap";
+import styled from "styled-components";
+import { connect } from "react-redux";
+
+import logo from "../images/logo.png";
 import LoginModal from "./LoginModal";
 import SignUpModal from "./SignUpModal";
 import { removeCurrentUser } from "../actions";
-import { connect } from "react-redux";
+import { GreenButton, RedButton } from "../components/Buttons";
+
+const StyledNavbar = styled(Navbar)`
+	background-color: ${({ theme }) => theme.colors.violet};
+	.navbar-toggler-icon {
+		background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+	}
+`;
+
+const ProfilePicture = styled.img`
+	border-radius: 5px;
+`;
 
 const NavBar = ({ currentUser, removeCurrentUser }) => {
 	const [currentModal, setCurrentModal] = useState("");
@@ -35,7 +48,7 @@ const NavBar = ({ currentUser, removeCurrentUser }) => {
 
 	return (
 		<>
-			<Navbar className="mb-3" color="light" light expand="md">
+			<StyledNavbar className="mb-3" expand="md">
 				<Link to="/">
 					<img
 						src={logo}
@@ -49,8 +62,8 @@ const NavBar = ({ currentUser, removeCurrentUser }) => {
 					{currentUser && currentUser.username ? (
 						<Nav className="ml-auto" navbar style={{ alignItems: "center" }}>
 							<NavItem>
-								<Link to="/profile" style={{ margin: "20px" }}>
-									<img
+								<Link to="/profile">
+									<ProfilePicture
 										src={currentUser.profile_picture}
 										width="30px"
 										height="30px"
@@ -59,32 +72,28 @@ const NavBar = ({ currentUser, removeCurrentUser }) => {
 								</Link>
 							</NavItem>
 							<NavItem>
-								<Button
-									color="danger"
+								<RedButton
 									onClick={isLoggingOut ? null : logout}
 									style={{ margin: "10px" }}
 								>
-									<div>
-										{isLoggingOut ? <Spinner size="sm" /> : "Logout"}
-									</div>
-								</Button>
+									<div>{isLoggingOut ? <Spinner size="sm" /> : "Logout"}</div>
+								</RedButton>
 							</NavItem>
 						</Nav>
 					) : (
 						<Nav className="ml-auto" navbar style={{ alignItems: "center" }}>
 							<NavItem>
-								<Button
-									color="success"
+								<GreenButton
 									onClick={() => setCurrentModal("login")}
 									style={{ margin: "10px" }}
 								>
 									Login
-								</Button>
+								</GreenButton>
 							</NavItem>
 						</Nav>
 					)}
 				</Collapse>
-			</Navbar>
+			</StyledNavbar>
 			<LoginModal
 				currentModal={currentModal}
 				setCurrentModal={setCurrentModal}

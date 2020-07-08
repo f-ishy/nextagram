@@ -1,11 +1,26 @@
 import React from "react";
-import { Card, CardTitle, Container, Button } from "reactstrap";
+import { Card, CardTitle, Col, Row } from "reactstrap";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
+import { PurpleButton } from "../components/Buttons";
 import UserImages from "../containers/UserImages";
 
+const UserCard = styled(Card)`
+	border-width: 2px;
+	border-style: inset;
+	margin-bottom: 1rem;
+	background-color: rgba(255, 255, 255, 0.13);
+
+	@media (max-width: 576px) {
+		background-color: unset;
+		border-style: unset;
+		border-width: unset;
+	}
+`;
+
 const ProfilePic = styled.img`
-	border: 2px solid black;
+	border: 1px solid ${({ theme }) => theme.colors.darkGrey};
 	width: 80px;
 	height: 80px;
 	object-fit: cover;
@@ -18,32 +33,24 @@ const FlexedTitle = styled(CardTitle)`
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 0;
-	${Button} {
-		height: 100%;
-	}
-`;
-
-const UserCard = styled(Card)`
-	border-width: 2px;
-	border-style: inset;
-	border-radius: 1rem;
-	margin-bottom: 1rem;
 	padding: 1em;
 `;
 
 export default function UserCards({ user }) {
 	return (
-		<Container>
-			<UserCard>
-				<FlexedTitle>
-					<Link to={`/users/${user.id}`}>
-						<ProfilePic src={user.profileImage} alt={user.username} />
-						<span>{user.username}</span>
-					</Link>
-					<Button color="primary">Follow</Button>
-				</FlexedTitle>
-				<UserImages user_id={user.id} height="150px" width="210px" />
-			</UserCard>
-		</Container>
+		<Row>
+			<Col md={{ size: 6, offset: 3 }} sm={{size: 8, offset: 2}}>
+				<UserCard>
+					<FlexedTitle>
+						<Link to={`/users/${user.id}`}>
+							<ProfilePic src={user.profileImage} alt={user.username} />
+							<span>{user.username}</span>
+						</Link>
+						<PurpleButton>Follow</PurpleButton>
+					</FlexedTitle>
+					<UserImages user_id={user.id} height="150px" width="210px" />
+				</UserCard>
+			</Col>
+		</Row>
 	);
 }

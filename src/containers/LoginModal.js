@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import {
-	Button,
 	Modal,
 	ModalHeader,
 	ModalBody,
@@ -14,6 +13,7 @@ import {
 import { useHistory } from "react-router-dom";
 import { connect } from "react-redux";
 import { setCurrentUser } from "../actions";
+import { PurpleButton, GreyButton } from "../components/Buttons";
 
 const LoginModal = ({ currentModal, setCurrentModal, setCurrentUser }) => {
 	const [username, setUsername] = useState("");
@@ -96,15 +96,15 @@ const LoginModal = ({ currentModal, setCurrentModal, setCurrentUser }) => {
 						<ModalFooter>
 							<div>
 								{submitting ? (
-									<Button disabled>Logging in</Button>
+									<GreyButton>Logging in</GreyButton>
 								) : (
-									<Button type="submit" color="primary">
+									<PurpleButton type="submit">
 										Log in
-									</Button>
+									</PurpleButton>
 								)}{" "}
-								<Button color="secondary" onClick={() => setCurrentModal("")}>
+								<GreyButton color="secondary" onClick={() => setCurrentModal("")}>
 									Cancel
-								</Button>
+								</GreyButton>
 							</div>
 						</ModalFooter>
 					</Form>
