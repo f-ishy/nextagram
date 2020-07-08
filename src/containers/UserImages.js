@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Container } from "reactstrap";
 import { connect } from "react-redux";
 
 import ImagePreviewer from "./ImagePreviewer";
 import { getUserImages } from "../actions";
 import ellipsis from "../lotties/ellipsis.json";
 import Lottie from "react-lottie";
+import { fadeImage } from "../styles/Keyframes";
 
 const defaultOptions = {
 	loop: true,
@@ -21,20 +21,31 @@ const ImageContainer = styled.div`
 	display: inline-block;
 	height: ${({ height }) => height};
 	cursor: pointer;
+	margin: 1px;
 
-	@media (max-width: 768px) {
+	@media (max-width: 576px) {
 		height: 100px;
 	}
 
 	@media (max-width: 420px) {
 		height: 80px;
 	}
+
+	:hover {
+		transition-duration: 0.5s;
+		transition-property: filter;
+		filter: brightness(50%);
+	}
 `;
 
 const Grid = styled.div`
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
-	grid-column-gap: 10px;
+	margin-bottom: 1rem;
+
+	@media (max-width: 576px) {
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+	}
 `;
 
 function UserImages({ user_id, height, width, userList, getUserImages }) {
@@ -48,7 +59,7 @@ function UserImages({ user_id, height, width, userList, getUserImages }) {
 	const { images } = userList.users.find((user) => user.id === user_id);
 
 	return (
-		<Container className="d-flex justify-content-center">
+		<>
 			<ImagePreviewer
 				selectedImage={selectedImage}
 				setSelectedImage={setSelectedImage}
@@ -68,7 +79,7 @@ function UserImages({ user_id, height, width, userList, getUserImages }) {
 								className="addhover"
 								height="100%"
 								width="100%"
-								style={{ objectFit: "cover", padding: "10px" }}
+								style={{ objectFit: "cover" }}
 							/>
 						</ImageContainer>
 					))}
@@ -78,7 +89,7 @@ function UserImages({ user_id, height, width, userList, getUserImages }) {
 				<div style={{ margin: "2rem" }}>This user has no images! :(((</div>
 			)}
 			{!images && <Lottie options={defaultOptions} height={200} width={200} />}
-		</Container>
+		</>
 	);
 }
 
