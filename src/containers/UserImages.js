@@ -6,7 +6,6 @@ import ImagePreviewer from "./ImagePreviewer";
 import { getUserImages } from "../actions";
 import ellipsis from "../lotties/ellipsis.json";
 import Lottie from "react-lottie";
-import { fadeImage } from "../styles/Keyframes";
 
 const defaultOptions = {
 	loop: true,
