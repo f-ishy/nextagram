@@ -6,6 +6,10 @@ import { Link } from "react-router-dom";
 import { PurpleButton } from "../components/Buttons";
 import UserImages from "../containers/UserImages";
 
+const UserCardContainer = styled(Row)`
+	margin: unset;
+`;
+
 const UserCard = styled(Card)`
 	border-width: 2px;
 	border-style: inset;
@@ -38,7 +42,7 @@ const FlexedTitle = styled(CardTitle)`
 
 export default function UserCards({ user }) {
 	return (
-		<Row>
+		<UserCardContainer>
 			<Col md={{ size: 6, offset: 3 }} sm={{size: 8, offset: 2}}>
 				<UserCard>
 					<FlexedTitle>
@@ -51,6 +55,6 @@ export default function UserCards({ user }) {
 					<UserImages user_id={user.id} height="150px" width="210px" />
 				</UserCard>
 			</Col>
-		</Row>
+		</UserCardContainer>
 	);
 }
