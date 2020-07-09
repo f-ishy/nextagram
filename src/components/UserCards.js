@@ -3,7 +3,6 @@ import { Card, CardTitle, Col, Row } from "reactstrap";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-import { PurpleButton } from "../components/Buttons";
 import UserImages from "../containers/UserImages";
 
 const UserCardContainer = styled(Row)`
@@ -50,7 +49,7 @@ export default function UserCards({ user }) {
 							<ProfilePic src={user.profileImage} alt={user.username} />
 							<span>{user.username}</span>
 						</Link>
-						<PurpleButton>Follow</PurpleButton>
+						{/* <PurpleButton>Follow</PurpleButton> */}
 					</FlexedTitle>
 					<UserImages user_id={user.id} height="150px" width="210px" />
 				</UserCard>
