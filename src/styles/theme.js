@@ -4,6 +4,7 @@ const theme = {
 	colors: {
 		black: "#181818",
 		white: "#d3d3d3",
+		elevations: ["rgba(255,255,255,0.13)", "rgba(255,255,255,0.33)"],
 		darkGrey: "#535c68",
 		lightGrey: "#95afc0",
 		blue: "#19389b",

@@ -13,7 +13,7 @@ const UserCard = styled(Card)`
 	border-width: 2px;
 	border-style: inset;
 	margin-bottom: 1rem;
-	background-color: rgba(255, 255, 255, 0.13);
+	background-color: ${({theme}) => theme.colors.elevations[0]};
 
 	@media (max-width: 576px) {
 		background-color: unset;

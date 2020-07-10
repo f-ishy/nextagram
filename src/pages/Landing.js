@@ -23,7 +23,7 @@ const PreviewImg = styled.img`
 `;
 
 const AuthBox = styled.div`
-	background-color: ${({ theme }) => theme.colors.violet};
+	background-color: ${({ theme }) => theme.colors.elevations[0]};
 	text-align: center;
 	height: 80vh;
 	border: 1px solid ${({ theme }) => theme.colors.darkGrey};
