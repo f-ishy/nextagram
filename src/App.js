@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import styled, { ThemeProvider } from "styled-components";
-import "bootstrap/dist/css/bootstrap.css";
 import { connect } from "react-redux";
 
 import Loading from "./components/Loading";

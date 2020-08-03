@@ -4,7 +4,7 @@ This is my Instagram clone project I worked on during my time in [Next Academy](
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/9cababeb-3e68-4561-8411-2fac23ea3638/deploy-status)](https://app.netlify.com/sites/nextagramtyy/deploys)
 
-[Visit the page here: <br/> ![alt text](https://github.com/ianteoyy/nextagram/raw/master/logo.png "Link to my instaclone") 
+[Visit the page here: <br/> ![alt text](https://github.com/ianteoyy/nextagram/blob/master/src/images/logo.png "Link to my instaclone") 
 ](https://nextyy.netlify.com/)
 
 ```diff
